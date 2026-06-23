@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protected:Blah</title>
+    <title>NO FACE NO CASE</title>
     <style>
         * {
             margin: 0;
@@ -13,10 +13,10 @@
         }
 
         body {
+            background: #000;
             color: #fff;
             min-height: 100vh;
             padding: 40px 20px;
-            background: url("https://i.imgur.com/9t8sQrX.gif") center / cover no-repeat fixed;
             position: relative;
         }
 
@@ -24,13 +24,12 @@
             content: "";
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.65);
+            background: rgba(0,0,0,0.6);
             z-index: 0;
-            pointer-events: none;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 720px;
             margin: 0 auto;
             text-align: center;
             position: relative;
@@ -38,56 +37,38 @@
         }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 3.5rem);
-            letter-spacing: 3px;
-            margin-bottom: 10px;
+            font-size: clamp(2.2rem, 8vw, 3rem);
+            letter-spacing: 2px;
+            margin-bottom: 40px;
             color: #fff;
-            text-shadow: 0 0 20px rgba(255,255,255,0.25);
-            font-family: 'Impact', sans-serif;
-        }
-
-        .nav-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 60px;
-            font-size: 0.9rem;
-            color: #888;
+            text-transform: uppercase;
         }
 
         .section-title {
-            font-size: 0.8rem;
-            color: #666;
+            font-size: 0.9rem;
+            color: #777;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin: 40px 0 20px;
+            margin: 35px 0 20px;
         }
 
         .grid {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 35px;
-            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 25px;
         }
 
         .user-card {
-            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .user-card:hover {
-            transform: scale(1.08);
         }
 
         .avatar-wrap {
             position: relative;
-            width: 90px;
-            height: 90px;
+            width: 85px;
+            height: 85px;
         }
 
         .avatar {
@@ -96,20 +77,17 @@
             border-radius: 50%;
             border: 2px solid #222;
             object-fit: cover;
-            z-index: 2;
-            position: relative;
             background: #111;
         }
 
         .status-dot {
             position: absolute;
-            bottom: 4px;
-            right: 4px;
-            width: 16px;
-            height: 16px;
+            bottom: 3px;
+            right: 3px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             border: 2px solid #000;
-            z-index: 4;
         }
 
         .status-online { background: #23a55a; }
@@ -119,41 +97,11 @@
 
         .username {
             margin-top: 8px;
-            font-size: 0.8rem;
-            color: #aaa;
+            font-size: 0.85rem;
+            color: #ccc;
         }
 
-        .marquee-wrapper {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            margin-top: 20px;
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
-
-        .marquee-content {
-            display: flex;
-            gap: 25px;
-            animation: scroll 35s linear infinite;
-            width: max-content;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .marquee-content:hover {
-            animation-play-state: paused;
-        }
-
-        .marquee-content .avatar-wrap {
-            width: 55px;
-            height: 55px;
-        }
-
-        /* Splash Screen - Gaya ng gusto mo */
+        /* Splash Screen */
         #splash {
             position: fixed;
             inset: 0;
@@ -175,125 +123,25 @@
             font-size: 1rem;
             color: #888;
             font-family: 'Segoe UI', sans-serif;
-            letter-spacing: 1px;
         }
 
-        /* Community Hub - Normal na itsura */
-        .hub-container {
-            margin-top: 20px;
-            padding: 15px;
-            background: #121212;
-            border: 1px solid #2a2a2a;
-            border-radius: 6px;
-        }
-
-        .server-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px;
-            margin: 8px 0;
-            background: #1e1e1e;
-            border-radius: 4px;
-            text-align: left;
-            cursor: pointer;
-        }
-
-        .server-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .server-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 1px solid #333;
-        }
-
-        .server-details h4 {
-            font-size: 0.95rem;
-            color: #fff;
-            margin-bottom: 2px;
-        }
-
-        .server-details p {
-            font-size: 0.8rem;
-            color: #999;
-        }
-
-        /* ✅ POPUP MODAL - TRANSPARENT / BLUR STYLE katulad ng picture */
-        #serverModal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.25); /* Sobrang transparent */
-            backdrop-filter: blur(18px); /* Malabo pero makikita pa rin ang likod */
-            -webkit-backdrop-filter: blur(18px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            padding: 20px;
-        }
-
-        .modal-content {
+        /* Marquee Members */
+        .marquee-wrapper {
             width: 100%;
-            max-width: 380px;
-            background: rgba(255, 255, 255, 0.04); /* Sobrang liwanag/transparent */
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 30px 20px;
-            text-align: center;
-            font-family: 'Impact', sans-serif; /* Kapareho ng font mo */
-            letter-spacing: 2px;
-            color: #fff;
-        }
-
-        .modal-content h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            text-shadow: 0 0 15px rgba(255,255,255,0.2);
-        }
-
-        .modal-content p {
-            font-size: 1rem;
-            color: #aaa;
-            margin-bottom: 25px;
-            font-family: 'Segoe UI', sans-serif;
-            letter-spacing: 1px;
-        }
-
-        .modal-join {
-            display: inline-block;
-            padding: 10px 25px;
-            background: rgba(45, 125, 70, 0.3);
-            border: 1px solid rgba(45, 125, 70, 0.5);
-            border-radius: 6px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 1rem;
-            font-family: 'Segoe UI', sans-serif;
-            transition: all 0.2s ease;
-        }
-
-        .modal-join:hover {
-            background: rgba(45, 125, 70, 0.6);
-            box-shadow: 0 0 12px rgba(45, 125, 70, 0.3);
-        }
-
-        .close-modal {
+            overflow: hidden;
             margin-top: 20px;
-            background: transparent;
-            border: none;
-            color: #888;
-            font-size: 0.9rem;
-            cursor: pointer;
-            font-family: 'Segoe UI', sans-serif;
         }
 
-        .close-modal:hover {
-            color: #fff;
+        .marquee-content {
+            display: flex;
+            gap: 25px;
+            animation: scroll 30s linear infinite;
+            width: max-content;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
     </style>
 </head>
@@ -306,33 +154,31 @@
     </div>
 
     <div class="container">
-        <div class="nav-top">
-            <span>HOME</span>
-            <span>Views: 8253</span>
-        </div>
+        <h1>NO FACE NO CASE</h1>
 
-        <h1>N̶O̶ ̶F̶A̶C̶E̶ ̶N̶O̶ ̶C̶A̶S̶E̶</h1>
-
-        <!-- TOP ROW -->
+        <!-- PINUNO -->
         <div class="section-title">PINUNO</div>
         <div class="grid">
             <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/Wh5d6RR.gif" alt="ESH">
+                    <img class="avatar" src="https://i.imgur.com/Wh5d6RR.gif" alt="Pinuno 1">
                     <div class="status-dot status-online"></div>
                 </div>
+                <div class="username">Pinuno 1</div>
             </div>
             <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/iDJB8Ol.png" alt="MOOZIE">
+                    <img class="avatar" src="https://i.imgur.com/iDJB8Ol.png" alt="Pinuno 2">
                     <div class="status-dot status-online"></div>
                 </div>
+                <div class="username">Pinuno 2</div>
             </div>
             <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/Hxjp3su.gif" alt="BLAH">
+                    <img class="avatar" src="https://i.imgur.com/Hxjp3su.gif" alt="Pinuno 3">
                     <div class="status-dot status-offline"></div>
                 </div>
+                <div class="username">Pinuno 3</div>
             </div>
         </div>
 
@@ -341,57 +187,59 @@
         <div class="grid">
             <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/iOZH1e2.jpeg" alt="Jeremy">
+                    <img class="avatar" src="https://i.imgur.com/iOZH1e2.jpeg" alt="Above 1">
                     <div class="status-dot status-offline"></div>
                 </div>
+                <div class="username">Above 1</div>
             </div>
             <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/cR3yxWV.jpeg" alt="Pnk">
+                    <img class="avatar" src="https://i.imgur.com/cR3yxWV.jpeg" alt="Above 2">
                     <div class="status-dot status-online"></div>
                 </div>
+                <div class="username">Above 2</div>
             </div>
             <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/XkHga9z.jpeg" alt="Ezee">
+                    <img class="avatar" src="https://i.imgur.com/XkHga9z.jpeg" alt="Above 3">
                     <div class="status-dot status-online"></div>
                 </div>
+                <div class="username">Above 3</div>
             </div>
             <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/FkMZrTS.png" alt="Bunni">
+                    <img class="avatar" src="https://i.imgur.com/FkMZrTS.png" alt="Above 4">
                     <div class="status-dot status-idle"></div>
                 </div>
+                <div class="username">Above 4</div>
             </div>
             <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/8Socw02.jpeg" alt="Prince">
+                    <img class="avatar" src="https://i.imgur.com/8Socw02.jpeg" alt="Above 5">
                     <div class="status-dot status-dnd"></div>
                 </div>
+                <div class="username">Above 5</div>
             </div>
         </div>
 
-        <!-- ADMINS -->
-        <div class="section-title">Top Shotta</div>
+        <!-- TOP SHOTTA -->
+        <div class="section-title">TOP SHOTTA</div>
         <div class="grid">
             <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/AQiHBgA.gif" alt="Yozir">
+                    <img class="avatar" src="https://i.imgur.com/AQiHBgA.gif" alt="Top 1">
                     <div class="status-dot status-online"></div>
                 </div>
+                <div class="username">Top 1</div>
             </div>
             <div class="user-card">
                 <div class="avatar-wrap">
-                    <img class="avatar" src="https://i.imgur.com/zY6UbYm.gif" alt="Clems">
+                    <img class="avatar" src="https://i.imgur.com/zY6UbYm.gif" alt="Top 2">
                     <div class="status-dot status-online"></div>
                 </div>
+                <div class="username">Top 2</div>
             </div>
-           <div class="user-card">
-               <div class="avatar-wrap">
-                   <img class="avatar" src="https://i.imgur.com/bOEmElX.png" alt="NIO">
-                   <div class="status-dot status-offline"></div>
-               </div>
-           </div>
+        </div>
 
         <!-- MEMBERS -->
         <div class="section-title">MEMBERS</div>
@@ -439,56 +287,67 @@
                     </div>
                     <div class="username">VinSwag</div>
                 </div>
+                <!-- Repeat para tuloy ang ikot -->
                 <div class="user-card">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://i.imgur.com/zqwxno6.png" alt="Thong">
-                        <div class="status-dot status-offline"></div>
+                        <img class="avatar" src="https://i.imgur.com/FGirYUH.png" alt="JM">
+                        <div class="status-dot status-online"></div>
                     </div>
-                    <div class="username">Thong</div>
+                    <div class="username">JM</div>
                 </div>
                 <div class="user-card">
                     <div class="avatar-wrap">
-                        <img class="avatar" src="https://i.imgur.com/ELy5Akk.png" alt="PJ">
+                        <img class="avatar" src="https://i.imgur.com/UnzfBlK.png" alt="Anghell">
+                        <div class="status-dot status-online"></div>
+                    </div>
+                    <div class="username">Anghell</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/prt0snc.png" alt="KenAmaru">
                         <div class="status-dot status-offline"></div>
                     </div>
-                    <div class="username">PJ</div>
+                    <div class="username">KenAmaru</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/kuLI3FO.png" alt="Ccer">
+                        <div class="status-dot status-offline"></div>
+                    </div>
+                    <div class="username">Ccer</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/AhzKzAw.png" alt="Ackz">
+                        <div class="status-dot status-offline"></div>
+                    </div>
+                    <div class="username">Ackz</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/MDTjE5l.png" alt="VinSwag">
+                        <div class="status-dot status-offline"></div>
+                    </div>
+                    <div class="username">VinSwag</div>
                 </div>
             </div>
-        </div>
-        
-        <!-- COMMUNITY HUB -->
-        <div class="section-title">COMMUNITY HUB</div>
-        <div class="hub-container" id="hubContainer"></div>
-    </div>
-
-    <!-- ✅ MODAL / POPUP NA LALABAS PAG PININDOT -->
-    <div id="serverModal">
-        <div class="modal-content">
-            <h3 id="modalName"></h3>
-            <p id="modalInfo"></p>
-            <a href="" id="modalLink" target="_blank" class="modal-join">JOIN SERVER</a>
-            <br>
-            <button class="close-modal" onclick="closeModal()">CLOSE</button>
         </div>
     </div>
 
     <!-- SOUND -->
     <audio id="bgAudio" loop preload="auto" style="display:none;">
         <source src="https://mp3tourl.com/audio/1782204984234-82cf6eb7-b5f1-4520-bd77-926e2c43b1c8.mp3" type="audio/mpeg">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     
 
     <script>
-        // Ayusin sirang larawan
+        // Ayusin sirang litrato
         document.querySelectorAll('img').forEach(img => {
             img.onerror = function() {
-                if(this.classList.contains('avatar') || this.classList.contains('server-icon')) {
-                    this.src = "https://cdn.discordapp.com/embed/avatars/0.png";
-                }
+                this.src = "https://cdn.discordapp.com/embed/avatars/0.png";
             };
         });
 
-        // Splash screen + Play sound
+        // Splash + Sound
         const splash = document.getElementById('splash');
         const audio = document.getElementById('bgAudio');
         audio.volume = 0.25;
@@ -497,53 +356,8 @@
             splash.style.display = 'none';
             audio.play().catch(err => console.log("Audio error:", err));
         });
-
-        // Eksaktong script mo lang
-        (function() {
-            'use strict';
-            const allyServers = [
-                { name: "BLAH #ALBTHCKS", invite: "Ty7qb4thSs", guildId: "1504217597900755075", icon: "335c5d2498dbf8b0ab834b022710c86a", members: "99999", status: "999999 ONLINE" }
-            ];
-
-            const container = document.getElementById('hubContainer');
-
-            allyServers.forEach(server => {
-                const iconUrl = `https://cdn.discordapp.com/icons/${server.guildId}/${server.icon}.png?size=128`;
-                const card = document.createElement('div');
-                card.className = 'server-card';
-                card.innerHTML = `
-                    <div class="server-info">
-                        <img class="server-icon" src="${iconUrl}" alt="${server.name}">
-                        <div class="server-details">
-                            <h4>${server.name}</h4>
-                            <p>${server.members} • ${server.status}</p>
-                        </div>
-                    </div>
-                `;
-                // Pag pinindot, lalabas ang transparent modal
-                card.onclick = () => openModal(server);
-                container.appendChild(card);
-            });
-        })();
-
-        // Buksan ang modal
-        function openModal(server) {
-            document.getElementById('modalName').textContent = server.name;
-            document.getElementById('modalInfo').textContent = `${server.members} Members • ${server.status}`;
-            document.getElementById('modalLink').href = `https://discord.gg/${server.invite}`;
-            document.getElementById('serverModal').style.display = 'flex';
-        }
-
-        // Isara ang modal
-        function closeModal() {
-            document.getElementById('serverModal').style.display = 'none';
-        }
-
-        // Isara kapag pinindot sa labas ng kahon
-        window.onclick = function(e) {
-            const modal = document.getElementById('serverModal');
-            if (e.target === modal) modal.style.display = 'none';
-        }
     </script>
+
 </body>
-</html>
+    </html>
+    
