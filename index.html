@@ -3,66 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFNC</title>
+    <title>NO FACE NO CASE</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;600;700&display=swap');
-
-        :root {
-            --neon-blue: #00d4ff;
-            --neon-pink: #ff00ff;
-            --status-online: #23a55a;
-            --status-idle: #f0b232;
-            --status-dnd: #f23f43;
-            --status-offline: #80848e;
-            --game-green: #23a55a;
-            --spotify-green: #1db954;
-            --discord-dark: #111214;
-            --discord-gray: #b5bac1;
-            --neon-yellow: #ffd700;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
-        html { scroll-behavior: smooth; }
 
         body {
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            background: #000;
             color: #fff;
-            font-family: 'Rajdhani', sans-serif;
-            overflow-x: hidden;
             min-height: 100vh;
+            padding: 40px 20px;
+            background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('banner.gif') no-repeat center center;
-            background-size: cover;
-            opacity: 0.15;
-            z-index: -1;
-            filter: contrast(120%) brightness(0.8);
+        .container {
+            max-width: 900px;imgur
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+            font-family: 'Impact', sans-serif;
+        }
+
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 40px 0 20px;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 30px;
+        }
+
+        .user-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .user-card:hover {
+            transform: scale(1.08);
+        }
+
+        .avatar-wrap {
+            position: relative;
+            width: 90px;
+            height: 90px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #222;
+            object-fit: cover;
+            z-index: 2;
+            position: relative;
+        }
+
+        .decor {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
             pointer-events: none;
-            animation: wavePulse 5s ease-in-out infinite;
+            z-index: 3;
         }
 
-        @keyframes wavePulse {
-            0%, 100% { opacity: 0.10; filter: brightness(0.7); }
-            50% { opacity: 0.18; filter: brightness(1.1); }
+        .status-dot {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid #000;
+            z-index: 4;
         }
 
-        @keyframes shine {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
+        .status-online { background: #23a55a; }
+        .status-idle { background: #f0b232; }
+        .status-dnd { background: #f23f43; }
+        .status-offline { background: #80848e; }
+
+        .username {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #aaa;
         }
 
-        @keyframes scrollLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        /* Gumagalaw na Members Row */
+        .marquee-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 20px;
         }
 
-        @keyframes scrollRight {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
+        .marquee-content {
+            display: flex;
+            gap: 25px;
+            animation: scroll 35s linear infinite;
+            width: max-content;
         }
 
         @keyframes scroll {
@@ -70,246 +143,194 @@
             100% { transform: translateX(-50%); }
         }
 
-        @keyframes skidShake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
+        .marquee-content:hover {
+            animation-play-state: paused;
         }
 
-        h1, h2, h3, .title, nav a { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
-
-        .user-node {
-            position: relative;
-            background: none; border: none; padding: 10px; text-align: center;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer !important;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .marquee-content .avatar-wrap {
+            width: 55px;
+            height: 55px;
         }
-
-        .user-node:hover { transform: translateY(-3px); }
-        .user-node h3 { font-size: 0.85rem; margin-top: 5px; }
-
-        .bot-node { cursor: default !important; }
-        .bot-node:hover { transform: none !important; }
-
-        .member-static-node {
-            cursor: default !important;
-            pointer-events: none;
-        }
-        .member-static-node:hover {
-            transform: none !important;
-        }
-
-        .discord-tooltip {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            width: 240px;
-            background: var(--discord-dark);
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            text-align: left;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .user-node:not(.member-static-node):hover .discord-tooltip {
-            opacity: 1;
-            transform: translateX(-50%) translateY(-10px);
-        }
-
-        .tt-banner { height: 60px; background: var(--neon-blue); margin: -16px -16px 12px -16px; border-radius: 11px 11px 0 0; }
-        .tt-avatar { width: 64px; height: 64px; border-radius: 50%; border: 5px solid var(--discord-dark); margin-top: -45px; background: var(--discord-dark); object-fit: cover; }
-        .tt-info h4 { font-size: 1rem; color: #fff; margin: 8px 0 2px 0; text-transform: none; letter-spacing: 0; }
-        .tt-info p { font-size: 0.8rem; color: var(--discord-gray); font-family: sans-serif; }
-        .tt-status { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 0.75rem; color: var(--discord-gray); font-weight: bold; }
-        .status-dot-mini { width: 10px; height: 10px; border-radius: 50%; }
-
-        .live-timer { font-size: 0.75rem; color: var(--game-green) !important; font-family: 'monospace', sans-serif; font-weight: 700; }
-        
-        .avatar-wrap { position: relative; width: 85px; height: 85px; margin: 0 auto 5px; display: flex; align-items: center; justify-content: center; }
-        .avatar-wrap img:not(.decoration-img) { width: 65px; height: 65px; border-radius: 50%; border: 3px solid var(--status-offline); position: relative; z-index: 1; object-fit: cover; }
-        .decoration-img { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 125%; height: 125%; pointer-events: none; z-index: 2; }
-
-        #splash { 
-            position: fixed; inset: 0; background: #000; z-index: 10000; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            transition: opacity 0.8s ease, transform 0.8s ease; 
-            pointer-events: auto; cursor: pointer;
-        }
-        #splash.hidden { opacity: 0; pointer-events: none; transform: scale(1.1); }
-        .enter-text { font-size: clamp(1.5rem, 5vw, 3rem); background: linear-gradient(90deg, #fff, var(--neon-blue), #fff); background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s infinite linear; cursor: pointer; }
-
-        nav { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,0.6); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 20px 0; display: flex; justify-content: center; gap: 30px; }
-        nav a { color: #aaa; text-decoration: none; font-size: 0.8rem; transition: 0.4s; }
-        nav a:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
-
-        section { padding: 40px 20px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; margin-top: 20px; }
-
-        #members {
-            position: relative;
-            padding: 60px 0;
-            margin: 40px auto;
-            max-width: 100%;
-            overflow: hidden;
-        }
-
-        .member-marquee-container {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            width: 100%;
-            overflow: hidden;
-            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-        }
-
-        .member-track {
-            display: flex;
-            gap: 40px;
-            width: max-content;
-        }
-
-        .track-left { animation: scrollLeft 30s linear infinite; }
-        .track-right { animation: scrollRight 30s linear infinite; }
-
-        .node-activities-list { margin-top: 4px; display: flex; flex-direction: column; gap: 2px; min-height: 14px; }
-        .mini-activity { font-size: 0.5rem; color: #888; text-transform: uppercase; font-weight: 600; display: flex; align-items: center; gap: 4px; justify-content: center; }
-        .mini-activity .dot { width: 5px; height: 5px; border-radius: 50%; }
-
-        #profile-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); display: none; justify-content: center; align-items: center; z-index: 9999; opacity: 0; transition: 0.3s ease; }
-        #profile-modal.active { opacity: 1; display: flex !important; }
-        .pro-card { background: #111; width: 440px; border-radius: 28px; border: 1px solid rgba(255,255,255,0.08); padding: 40px; transform: scale(0.9); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
-        .p-avatar-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; }
-        .p-avatar-main { width: 110px; height: 110px; border-radius: 50%; border: 3px solid #333; z-index: 1; object-fit: cover; }
-        .p-decoration { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 130%; height: 130%; z-index: 2; pointer-events: none; }
-        .modal-close { position: absolute; top: 15px; right: 20px; color: #444; font-size: 1.5rem; cursor: pointer; }
-
-        .badge-item { background: rgba(255,255,255,0.05); padding: 4px 12px; border-radius: 6px; font-size: 0.65rem; color: var(--neon-blue); border: 1px solid rgba(0,212,255,0.2); font-weight: bold; margin: 5px; display: inline-block; }
-        .badge-item.member-badge { color: var(--neon-yellow); border-color: rgba(255,215,0,0.2); }
-        .spotify-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 20px; margin-top: 15px; position: relative; overflow: hidden; }
-        .spotify-info { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .spotify-info img { width: 65px; height: 65px; border-radius: 12px; }
-        .spotify-bar-fill { height: 100%; background: linear-gradient(90deg, #ff00ff, #00d4ff); border-radius: 2px; width: 0%; transition: width 1s linear; }
-
-        #allies { padding: 80px 0; overflow: hidden; width: 100%; }
-        .marquee-container { display: flex; width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
-        .ally-track { display: flex; gap: 15px; padding: 15px 0; animation: scroll 25s linear infinite; }
-
-        .ally-card { background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 14px; min-width: 220px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; transition: 0.4s; }
-        .ally-icon-wrap img { width: 36px !important; height: 36px !important; border-radius: 50%; }
-        .ally-name { font-size: 0.75rem !important; font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
-        .ally-stats-small { font-size: 0.6rem !important; color: var(--discord-gray); }
-        .ally-stats-small .status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--game-green); }
-
-        .music-widget { position: fixed; bottom: 30px; right: 30px; background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; gap: 15px; border: 1px solid rgba(255,255,255,0.1); z-index: 1000; }
-        #skid-overlay { position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(20px); }
-        #skid-overlay.active { display: flex; }
-        #skid-overlay h1 { font-family: 'Orbitron', sans-serif; color: var(--neon-pink); animation: skidShake 0.4s infinite; }
-        
-        .activity-slot { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); margin-top: 15px; }
-        .activity-text h4 { font-size: 0.9rem; color: #fff; }
-        .activity-text p { font-size: 0.75rem; color: var(--discord-gray); }
-
-        #bots { padding: 60px 20px; }
-        .bot-card { background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 30px; max-width: 520px; margin: 0 auto; transition: 0.4s ease; position: relative; overflow: hidden; }
-        .bot-card:hover { border-color: var(--neon-blue); box-shadow: 0 0 30px rgba(0,212,255,0.1); transform: translateY(-3px); }
-        .bot-banner-link { display: block; position: absolute; top: 0; left: 0; right: 0; height: 60px; overflow: hidden; z-index: 0; border-radius: 19px 19px 0 0; background: linear-gradient(135deg, #0a0a2e, #1a0a3e); }
-        .bot-banner-link img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: opacity 0.3s ease; }
-        .bot-banner-link:hover img { opacity: 1; }
-        .bot-card-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 25px; width: 100%; margin-top: 20px; }
-        .bot-avatar { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--neon-blue); object-fit: cover; flex-shrink: 0; }
-        .bot-info h3 { font-size: 1rem; color: #fff; margin-bottom: 4px; }
-        .bot-info p { font-size: 0.7rem; color: var(--discord-gray); margin-bottom: 12px; }
-        .bot-invite-btn { display: inline-block; padding: 8px 20px; background: linear-gradient(135deg, var(--neon-blue), #0090b3); color: #000; font-family: 'Orbitron', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; text-decoration: none; letter-spacing: 1px; border-radius: 8px; transition: 0.3s ease; border: none; cursor: pointer; }
-        .bot-invite-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,212,255,0.4); }
-        .bot-tag { display: inline-block; background: rgba(0,212,255,0.15); border: 1px solid rgba(0,212,255,0.3); padding: 2px 8px; border-radius: 4px; font-size: 0.55rem; color: var(--neon-blue); font-weight: 700; text-transform: uppercase; margin-left: 6px; vertical-align: middle; }
-
-        .bot-node .avatar-wrap img:not(.decoration-img) { border-color: var(--neon-blue) !important; }
-        .bot-scopes { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-top: 6px; }
-        .bot-scope-tag { font-size: 0.5rem; padding: 2px 6px; background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2); border-radius: 3px; color: var(--neon-blue); }
-
-        .member-role-tag { display: inline-block; font-size: 0.55rem; padding: 2px 6px; border-radius: 4px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-        .member-role-tag.regular { background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.2); color: var(--neon-yellow); }
-        .member-role-tag.trial { background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.2); color: var(--neon-blue); }
-        .member-role-tag.vip { background: rgba(255, 0, 255, 0.1); border: 1px solid rgba(255, 0, 255, 0.2); color: var(--neon-pink); }
-
-        .section-divider { text-align: center; padding: 40px 0; color: rgba(255,255,255,0.05); font-size: 0.6rem; letter-spacing: 10px; text-transform: uppercase; font-family: 'Orbitron', sans-serif; }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="nav-top">
+            <span>HOME</span>
+            <span>Views: 8253</span>
+        </div>
 
-    <div id="skid-overlay">
-        <h1><span>PUTANGINA MO SKIDDER</span></h1>
-        <p style="margin-top:20px; color:#888; text-transform:uppercase; letter-spacing:4px;">✦ hindi para sa tamad ✦</p>
-    </div>
+        <h1>NO FACE NO CASE</h1>
 
-    <div id="splash">
-        <h1 class="enter-text">[ INITIALIZING PROTOCOL ]</h1>
-        <p style="margin-top: 15px; color: #444; font-size: 0.7rem;">CLICK TO ENTER</p>
-    </div>
-
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#founder-nexus">Founder</a>
-        <a href="#core">Day One's</a>
-        <a href="#members">Members</a>
-        <a href="#bots">SECURITY</a>
-        <a href="#allies">Servers</a>
-    </nav>
-
-    <main id="home">
-        <header style="text-align: center; padding: 60px 20px;">
-            <h1 class="title" style="font-size: clamp(2rem, 8vw, 4rem);">N̶O̶ ̶F̶A̶C̶E̶ ̶N̶O̶ ̶C̶A̶S̶E̶</h1>
-        </header>
-
-        <section id="founder-nexus">
-            <h2 style="text-align:center; margin-bottom: 30px; font-size: 0.9rem; color: var(--neon-pink);">[ FOUNDER ]</h2>
-            <div style="display: flex; justify-content: center;">
-                <div class="user-node" data-discordid="1497306715715010620">
-                    <div class="avatar-wrap"><img src="https://i.imgur.com/5rxVNzc.gif"></div>
-                    <h3>BLAH</h3>
-                    <p style="color: var(--neon-pink); font-size: 0.7rem; font-weight: bold;">FOUNDER</p>
-                    <div class="node-activities-list"></div>
+        <!-- TOP ROW -->
+        <div class="grid">
+            <div class="user-card" data-id="1">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.imgur.com/Wh5d6RR.gif">
+                    <img class="decor" src="https://cdn.discordapp.com/avatar-decoration-presets/a_kitty_ears.png?size=160">
+                    <div class="status-dot status-online"></div>
                 </div>
             </div>
-        </section>
 
-        <section id="core">
-            <h2 style="text-align:center; margin-bottom: 30px; font-size: 0.9rem; color: var(--neon-blue);">[ DAY ONE'S ]</h2>
-            <div class="grid-container">
-                <div class="user-node" data-discordid="1255196462195806290"><div class="avatar-wrap"><img src="https://i.imgur.com/ArutNAu.gif"></div><h3>ESH</h3><p style="color: var(--neon-blue); font-size: 0.65rem;">1OF1</p><div class="node-activities-list"></div></div>
-                <div class="user-node" data-discordid="1421541305309335643"><div class="avatar-wrap"><img src="https://i.imgur.com/gehCnTP.jpeg"></div><h3>NIO</h3><p style="color: var(--neon-blue); font-size: 0.65rem;"><-----></p><div class="node-activities-list"></div></div>
-                <div class="user-node" data-discordid="1505646697290924103"><div class="avatar-wrap"><img src="https://i.imgur.com/PxC1yrk.jpeg"></div><h3>JEREMY</h3><p style="color: var(--neon-blue); font-size: 0.65rem;"><-----></p><div class="node-activities-list"></div></div>
-                <div class="user-node" data-discordid="1475526026422649115"><div class="avatar-wrap"><img src="https://i.imgur.com/GkrIf3m.gif"></div><h3>PNK</h3><p style="color: var(--neon-blue); font-size: 0.65rem;">OTF</p><div class="node-activities-list"></div></div>
-                <div class="user-node" data-discordid="851613391096381440"><div class="avatar-wrap"><img src="https://i.imgur.com/Uiq8jYs.jpeg"></div><h3>EZEE</h3><p style="color: var(--neon-blue); font-size: 0.65rem;">OTF</p><div class="node-activities-list"></div></div>
-                <div class="user-node" data-discordid="1489962785839386755"><div class="avatar-wrap"><img src="https://i.imgur.com/eB30h9p.png"></div><h3>MOOZIE</h3><p style="color: var(--neon-blue); font-size: 0.65rem;">Pureskills Admin</p><div class="node-activities-list"></div></div>
-                <div class="user-node" data-discordid="1414171167883001876"><div class="avatar-wrap"><img src="https://i.imgur.com/nvzC20z.jpeg"></div><h3>PRINCE</h3><p style="color: var(--neon-blue); font-size: 0.65rem;">Pureskills Admin</p><div class="node-activities-list"></div></div>
+            <div class="user-card" data-id="2">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.imgur.com/iDJB8Ol.png">
+                    <img class="decor" src="https://cdn.discordapp.com/avatar-decoration-presets/a_kitty_ears.png?size=160">
+                    <div class="status-dot status-online"></div>
+                </div>
             </div>
-        </section>
 
-        <div class="section-divider">━━━━━━━━━ ✦ ━━━━━━━━━</div>
+            <div class="user-card" data-id="3">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.imgur.com/Hxjp3su.gif">
+                    <div class="status-dot status-offline"></div>
+                </div>
+            </div>
+        </div>
 
-        <section id="members">
-            <h2 style="text-align:center; margin-bottom: 40px; font-size: 0.9rem; color: var(--neon-yellow);">[ MEMBERS ]</h2>
+        <!-- ABOVE ALL -->
+        <div class="section-title">ABOVE ALL</div>
+        <div class="grid">
+            <div class="user-card" data-id="4">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.imgur.com/iOZH1e2.jpeg">
+                    <div class="status-dot status-offline"></div>
+                </div>
+            </div>
+
+            <div class="user-card" data-id="5">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.imgur.com/cR3yxWV.jpeg">
+                    <img class="decor" src="https://cdn.discordapp.com/avatar-decoration-presets/a_kitty_ears.png?size=160">
+                    <div class="status-dot status-online"></div>
+                </div>
+            </div>
+
+            <div class="user-card" data-id="6">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.imgur.com/XkHga9z.jpeg">
+                    <img class="decor" src="https://cdn.discordapp.com/avatar-decoration-presets/a_fire_ring.png?size=160">
+                    <div class="status-dot status-online"></div>
+                </div>
+            </div>
+
+            <div class="user-card" data-id="7">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.imgur.com/FkMZrTS.png">
+                    <img class="decor" src="https://cdn.discordapp.com/avatar-decoration-presets/a_crossbones.png?size=160">
+                    <div class="status-dot status-idle"></div>
+                </div>
+            </div>
+
+            <div class="user-card" data-id="8">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.imgur.com/8Socw02.jpeg">
+                    <img class="decor" src="https://cdn.discordapp.com/avatar-decoration-presets/a_x4u.png?size=160">
+                    <div class="status-dot status-dnd"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMINS -->
+        <div class="section-title">ADMINS</div>
+        <div class="grid">
+            <div class="user-card" data-id="9">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.imgur.com/AQiHBgA.gif">
+                    <img class="decor" src="https://cdn.discordapp.com/avatar-decoration-presets/a_kitty_ears_red.png?size=160">
+                    <div class="status-dot status-online"></div>
+                </div>
+            </div>
+
+            <div class="user-card" data-id="10">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.imgur.com/zY6UbYm.gif">
+                    <img class="decor" src="https://cdn.discordapp.com/avatar-decoration-presets/a_heart.png?size=160">
+                    <div class="status-dot status-online"></div>
+              </div>
+          </div>
+
+        <!-- MEMBERS - GUMAGALAW -->
+        <div class="section-title">MEMBERS</div>
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <!-- Unang set -->
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/FGirYUH.png">
+                        <div class="status-dot status-online"></div>
+                    </div>
+                    <div class="username">JM</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/UnzfBlK.png">
+                        <div class="status-dot status-online"></div>
+                    </div>
+                    <div class="username">Anghell</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/prt0snc.png">
+                        <div class="status-dot status-offline"></div>
+                    </div>
+                    <div class="username">KenAmaru</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/kuLI3FO.png">
+                        <div class="status-dot status-offline"></div>
+                    </div>
+                </div> class="username">Ccer</div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/AhzKzAw.png">
+                        <div class="status-dot status-offline"></div>
+                    </div>
+                    <div class="username">Ackz</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/MDTjE5l.png">
+                        <div class="status-dot status-offline"></div>
+                    </div>
+                    <div class="username">VinSwag</div>
+                </div>
+                <div class="user-card">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://i.imgur.com/zqwxno6.png">
+                        <div class="status-dot status-offline"></div>
+                    </div>
+                    <div class="username">Thong</div>
+                </div>
+            </div>
+
+     <script>
+        // Real-time Discord Status
+        const socket = new WebSocket('wss://api.lanyard.rest/socket');
+        const userIds = ["1497306715715010620", "1255196462195806290", "1421541305309335643", "1505646697290924103", "1475526026422649115", "851613391096381440", "1489962785839386755", "1414171167883001876"];
+
+        socket.onopen = () => {
+            socket.send(JSON.stringify({ op: 2, d: { subscribe_to_ids: userIds } }));
+        };
+
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.op === 0 && data.d) {
+                const id = data.d.discord_user.id;
+                const status = data.d.discord_status;
+                const avatar = data.d.discord_user.avatar;
+                const avatarUrl = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${avatar.startsWith('a_') ? 'gif' : 'png'}?size=128`;
+
+                const card = document.querySelector(`.user-card[data-id="${id}"]`);
+                if (card) {
+                    card.querySelector('.avatar').src = avatarUrl;
+                    const dot = card.querySelector('.status-dot');
+                    dot.className = `status-dot status-${status}`;
+                }
+            }
+        };
+    </script>
+</body>
+</html>
             
-            <div class="member-marquee-container">
-                <div class="member-track track-left" id="memberTrack1"></div>
-                <div class="member-track track-right" id="memberTrack2"></div>
-            </div>
-        </section>
-
-        <section id="bots">
-            <h2 style="text-align:center; margin-bottom: 30px; font-size: 0.9rem; color: var(--neon-pink);">[ SECURITY ]</h2>
-            <div class="grid-container" style="max-width: 400px; margin: 0 auto 40px;">
-                <div class="user-node bot-node" data-discordid="1494022976058691880">
-                    <div class="avatar-wrap"><img src="bot.jpg"></div>
-         
